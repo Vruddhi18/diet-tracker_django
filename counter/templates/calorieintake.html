@@ -1,0 +1,248 @@
+!DOCTYPE html>
+{% load static %} {%load mathfilters%} {%load humanize%}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous" />
+    <link href="{% static 'style.css' %}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    <title>Foodie Calorie Finder</title>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <!-- {{api}} -->
+        <nav class="navbar navbar-expand-sm fixed-top navbar-dark bg-dark" style="background-color: black;">
+            <div class="container-fluid">
+                <a href="/">
+                    <img src="{% static 'images/logo.png' %}" class="img-responsive logo" /></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <ul class="navbar-nav" style="padding-left: 800px; font-size: 20px;">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/calorie">Calorie Counter</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/daily">Daily Tracker</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about">Brain Buffet</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <br><br><br><br><br><br>
+    
+        <div class=" container caloriescont shadow rounded">
+            <b style="font-size: 50px;">How Many Calories Should You Eat Per Day?</b>
+            <hr>
+            <p style="font-size: 30px;">Reading a food label could give you the impression that everybody needs more or less the same things, in the same quantities, to be healthy. Not so! We all have <i>different bodies, different goals, and different lifestyles</i>, and the way we eat should reflect that. <br><br>
+
+            This will help you estimate a daily calorie target to help you lose weight, add muscle, or maintain your current weight. This can be your launch pad to gain better control of your nutrition and better results while working toward your goals! <br><br>
+            We've used the Mifflin St. Jeor calculation, which is considered by our nutritionists and dieticians to be the "gold standard" of calorie calculators
+            </p>
+        </div>
+        <br><br><br><br>
+    <div class="row">
+        <div class="col-md-3" ></div>
+        <script>
+            function calc()
+            {
+                var male=document.getElementById("male")
+                var female = document.getElementById("female")
+                console.log(female)
+                var weight = document.getElementById("weight").value;
+                var age = document.getElementById("age").value;
+                var height = document.getElementById("height").value;
+                var sedentary =document.getElementById("sedentary") ;
+                console.log('sedentary')
+                var light = document.getElementById("light");
+                var moderate = document.getElementById("moderate");
+                var very = document.getElementById("very");
+                var extra = document.getElementById("extra");
+                var lose =  document.getElementById("lose");
+                var gain = document.getElementById("gain");
+                var same = document.getElementById('same')
+    
+                // if (1){
+                    if (male.checked)
+                    {
+                        // bmr.innerHTML = "Your Basal Metabolic Rate is : "
+                        var b =  (10*parseInt(weight)) + (6.25*parseInt(height)) - (5*parseInt( age)) +5 
+                        // bmr.innerHTML="BMR is "+ b
+                        // document.getElementById("bmr").innerHTML = "BMR is " + b;
+                    }
+                    else if (female.checked)
+                    {
+                        var b = (10*parseInt(weight))+ (6.25*parseInt(height)) - (5*parseInt(age))-161 
+                        // bmr.innerHTML="BMR is" + b
+                        // document.getElementById("bmr").innerHTML = "BMR is nvskv" + b;
+                    }
+                // }
+                if(sedentary.checked)
+                {
+                    var s = document.getElementById("sedentary").value ;
+                    // document.getElementById("TEED").innerHTML='TEED is ' + s;
+                }
+                else if (light.checked)
+                {
+                    var s = document.getElementById("light").value ;
+                    // document.getElementById("TEED").innerHTML='TEED is ' + s;
+                }
+                else if(moderate.checked)
+                {
+                    var s = document.getElementById("moderate").value ;
+                    // document.getElementById("TEED").innerHTML='TEED is ' + s;
+                }
+                else if(very.checked)
+                {
+                    var s = document.getElementById("very").value ;
+                    // document.getElementById("TEED").innerHTML='TEED is ' + s;
+                }
+                else 
+                {
+                    var s = document.getElementById("extra").value ;
+                    // document.getElementById("TEED").innerHTML='TEED is ' + s;
+                }
+                var total = b * s
+                if(lose.checked){
+                    var l= document.getElementById("lose").value 
+                    var lw= l*total
+                    document.getElementById('total').innerHTML= "Total Calories you need to consume per day are: "+ lw
+                }
+                else if(gain.checked)
+                {
+                    var g= document.getElementById("gain").value 
+                    var gw= total +500
+                    document.getElementById('total').innerHTML= "Total Calories you need to consume per day are: "+ gw
+                }
+                else
+                {
+                document.getElementById('total').innerHTML= "Total Calories you need to consume per day are: "+ total
+                }
+              }
+</script>
+<div class="row">
+  <div class="col-md-3" ></div>
+<div class="col-md-6 caloriescont shadow rounded">
+      <form style="margin-left: 150px; font-size: 20px;">
+              <input type="radio" id="male" name="male">
+              <label for="male"><b>Male</b></label>
+              <input type="radio" id="female" name="female" style="margin-left: 100px;">
+              <label for="female"><b>Female</b></label>
+          <br><br>
+              <label for="weight"><b>Weight:</b></label>
+              <input type="text" name="weight" id="weight">
+          <br><br>
+              <label for="height"><b>Height:</b><i>(in cm)</i></label>
+              <input type="text" name="height" id="height">
+          <br><br>
+              <label for="age"><b>Age:</b></label>
+              <input type="text" name="age" id="age">
+              <br><br>
+              <b>Activity Level:</b><br>         
+              <input type="checkbox" name="sedentary" id="sedentary" value="1.2">
+              <label for="sedentary">Sedentary(Little or no exercise)</label><br>
+              <input type="checkbox" name="light" id="light" value="1.375">
+              <label for="light">Lightly Active(Light exercise 1-2 days/week)</label><br>
+              <input type="checkbox" name="moderate" id="moderate" value="1.550">
+              <label for="moderate">Moderately Active(Moderate exercise 3-5 days/week)</label><br>
+              <input type="checkbox" name="very" id="very" value="1.725">
+              <label for="very">Very Active(Hard exercise 6-7 days/week)</label><br>
+              <input type="checkbox" name="extra" id="extra" value="1.9">
+              <label for="extra">Extra Active(Hard daily exercise and physical job or two times a day training)</label><br>
+            <b>Goal:</b><br>
+            <input type="checkbox" name="lose" id="lose" value="0.15">
+            <label for="lose">I want to lose weight</label><br>
+            <input type="checkbox" name="same" id="same">
+            <label for="same">I want to maintain weight</label><br>
+            <input type="checkbox" name="gain" id="gain" value="500">
+            <label for="gain">I want to gain weight</label><br><br>
+            
+              <button type="button"style="padding:6px;margin-left:200px; background-color:black;color:white;" onclick="calc()">Submit</button>
+      </form>
+  <br><br><br>
+  <p id="TEED" style="background-color: blueviolet;"></p>
+  <p id="bmr" style="background-color: chocolate;"></p>
+  <p id="total" style="background-color: beige; font-size: 20px; font-weight: bold;"></p>
+</div>
+    </div>
+    </div>
+    <br><br><br><br><br>
+    <footer>
+        <div class="footer-content">
+            <h3>Diet Tracker</h3>
+            <p>It strives to empower users to make informed decisions about their nutrition and exercise</p>
+            <ul class="socials">
+                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+                <li><a href="#"><i class="fa fa-linkedin-square"></i></a></li>
+            </ul>
+        </div>
+    </footer>
+</body>
+<style>
+    footer{
+    font-family: sans-serif;
+    /* position: absolute; */
+    background: #111;
+    height: 150px;
+    width: 100vw;
+    /* padding-top: 40px; */
+    color: #fff;
+}
+.footer-content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+.footer-content h3{
+    font-size: 2.1rem;
+    font-weight: 500;
+    text-transform: capitalize;
+    line-height: 3rem;
+}
+.footer-content p{
+    max-width: 800px;
+    /* margin: 10px auto; */
+    line-height: 28px;
+    font-size: 20px;
+    color: #cacdd2;
+}
+.socials{
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0 3rem 0;
+}
+.socials li{
+    margin: 0 10px;
+}
+.socials a{
+    text-decoration: none;
+    color: #fff;
+    border: 1.1px solid white;
+    padding: 5px;
+    border-radius: 50%;
+}
+.socials a i{
+    font-size: 1.1rem;
+    width: 20px;
+    /* transition: color .4s ease; */
+}
+.socials a:hover i{
+    color: 4b8673;
+}
+</style>
+
+</html>
