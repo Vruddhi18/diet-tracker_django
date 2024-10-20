@@ -19,12 +19,12 @@ insights on healthy food habits.
 
 ## Installation
 ### 1. Clone the repository
-''' git clone https://github.com/Vruddhi18/diet-tracker_django.git'''
+``` git clone https://github.com/Vruddhi18/diet-tracker_django.git ```
 ### 2. Navigate the project directory
-
+``` cd foodie ```
 ### 3. Apply the migrations
-''' python manage.py migrate'''
+``` python manage.py migrate ```
 
 ### 4. Run the development server
-''' python manage.py runserver'''
+``` python manage.py runserver ```
 
