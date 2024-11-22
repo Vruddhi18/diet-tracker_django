@@ -1,7 +1,7 @@
 # Diet Tracker
 
 ## Project Overview
-The **Diet Tracker**  is a Django web-based application that allows users to track their daily food intake. It provides a user-friendly interface for logging meals, tracking calories and give 
+The **Diet Tracker**  is a Django web-based application that allows users to track their daily food intake. It provides a user-friendly interface for logging meals, tracking calories and offering 
 insights on healthy food habits.
 
 ## Features
